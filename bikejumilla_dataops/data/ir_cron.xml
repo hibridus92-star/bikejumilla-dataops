@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="ir_cron_bikejumilla_generate_snapshot" model="ir.cron">
+        <field name="name">BikeJumilla DataOps: generar snapshot</field>
+        <field name="model_id" ref="model_bikejumilla_dataops_snapshot"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_generate_snapshot()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active" eval="False"/>
+    </record>
+</odoo>

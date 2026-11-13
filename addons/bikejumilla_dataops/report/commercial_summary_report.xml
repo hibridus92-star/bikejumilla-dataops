@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_commercial_summary" model="ir.actions.report">
+        <field name="name">Resumen comercial BikeJumilla</field>
+        <field name="model">bikejumilla.commercial.analysis.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">bikejumilla_dataops.report_commercial_summary_document</field>
+        <field name="report_file">bikejumilla_dataops.report_commercial_summary_document</field>
+    </record>
+
+    <template id="report_commercial_summary_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="wizard">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Resumen comercial BikeJumilla</h2>
+                        
+                        <div class="row mt-4 mb-4">
+                            <div class="col-6">
+                                <strong>Periodo analizado:</strong> <span t-field="wizard.date_from"/> - <span t-field="wizard.date_to"/><br/>
+                                <strong>Comercial:</strong> <span t-field="wizard.salesperson_id.name" t-options='{"widget": "char"}'/><br/>
+                                <strong>Cliente:</strong> <span t-field="wizard.partner_id.name" t-options='{"widget": "char"}'/>
+                            </div>
+                            <div class="col-6 text-end">
+                                <strong>Fecha de generación:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/><br/>
+                                <strong>Usuario:</strong> <span t-esc="user.name"/>
+                            </div>
+                        </div>
+
+                        <h3>Resumen</h3>
+                        <table class="table table-sm table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>N.º de operaciones</th>
+                                    <th>Importe total</th>
+                                    <th>Importe medio por operación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span t-esc="result_count"/></td>
+                                    <td><span t-esc="result_amount" t-options='{"widget": "monetary", "display_currency": wizard.currency_id}'/></td>
+                                    <td><span t-esc="extra_metric" t-options='{"widget": "monetary", "display_currency": wizard.currency_id}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="mt-4">Detalle de operaciones</h3>
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Pedido</th>
+                                    <th>Cliente</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th class="text-end">Importe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="result_lines" t-as="line">
+                                    <td><span t-esc="line['name']"/></td>
+                                    <td><span t-esc="line['partner']"/></td>
+                                    <td><span t-esc="line['date']"/></td>
+                                    <td><span t-esc="line['state']"/></td>
+                                    <td class="text-end"><span t-esc="line['amount']" t-options='{"widget": "monetary", "display_currency": wizard.currency_id}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

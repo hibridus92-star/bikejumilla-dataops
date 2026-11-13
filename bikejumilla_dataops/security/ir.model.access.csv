@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bikejumilla_dataops_snapshot_user,bikejumilla.dataops.snapshot user,model_bikejumilla_dataops_snapshot,base.group_user,1,0,0,0
+access_bikejumilla_commercial_analysis_wizard_user,bikejumilla.commercial.analysis.wizard user,model_bikejumilla_commercial_analysis_wizard,base.group_user,1,1,1,1

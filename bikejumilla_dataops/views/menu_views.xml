@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_bikejumilla_dataops_root" name="BikeJumilla DataOps" sequence="90"/>
+    <menuitem id="menu_bikejumilla_dataops_analysis" name="Analizador comercial" parent="menu_bikejumilla_dataops_root" action="action_bikejumilla_commercial_analysis_wizard" sequence="10"/>
+    <menuitem id="menu_bikejumilla_dataops_snapshots" name="Snapshots" parent="menu_bikejumilla_dataops_root" action="action_bikejumilla_dataops_snapshots" sequence="20"/>
+</odoo>

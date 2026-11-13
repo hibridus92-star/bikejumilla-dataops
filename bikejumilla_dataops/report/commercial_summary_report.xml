@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_commercial_summary" model="ir.actions.report">
+        <field name="name">Resumen comercial BikeJumilla</field>
+        <field name="model">bikejumilla.commercial.analysis.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">bikejumilla_dataops.report_commercial_summary_document</field>
+        <field name="report_file">bikejumilla_dataops.report_commercial_summary_document</field>
+    </record>
+    <template id="report_commercial_summary_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="wizard">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Resumen comercial BikeJumilla</h2>
+                        <p><strong>Periodo:</strong> <span t-field="wizard.date_from"/> - <span t-field="wizard.date_to"/></p>
+                        <p class="text-muted">Plantilla inicial. TODO alumno: incorporar parámetros, métricas, detalle e indicadores reales.</p>
+                        <h3>Resumen</h3>
+                        <table class="table table-sm"><tbody>
+                            <tr><td>N.º de operaciones</td><td><span t-esc="result_count"/></td></tr>
+                            <tr><td>Importe total</td><td><span t-esc="result_amount"/></td></tr>
+                            <tr><td>Indicador adicional</td><td><span t-esc="extra_metric or '-'"/></td></tr>
+                        </tbody></table>
+                        <h3>Detalle</h3>
+                        <p>TODO alumno: construir una tabla QWeb recorriendo <code>result_lines</code> u otra estructura justificada.</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
